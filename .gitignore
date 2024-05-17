@@ -1,2 +1,10 @@
 # Pusher Wallet
 .mnemonic.txt
+
+# Foundry
+cache/
+out/
+broadcast/
+docs/
+*.env
+.idea

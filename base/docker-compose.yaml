@@ -1,0 +1,19 @@
+version: '3.3'
+services:
+  price-pusher:
+    container_name: base-rdnt-pyth-pusher
+    # Replace <version> with the latest released image of the price pusher from here:
+    # https://gallery.ecr.aws/pyth-network/xc-price-pusher
+    image: public.ecr.aws/pyth-network/xc-price-pusher:v6.1.0
+    restart: "no"
+    command: |
+      -- evm
+      --endpoint=https://mainnet.base.org
+      --mnemonic-file=/mnemonic
+      --pyth-contract-address=0x8250f4aF4B972684F7b336503E2D6dFeDeB1487a
+      --price-service-endpoint=https://hermes.pyth.network
+      --price-config-file=/price_config
+      --polling-frequency=900
+    volumes:
+      - ./../price-config.yaml:/price_config
+      - ./../.mnemonic.txt:/mnemonic

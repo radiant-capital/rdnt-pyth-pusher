@@ -1,0 +1,5 @@
+- alias: RDNT/USD
+  id: "0xc8cf45412be4268bef8f76a8b0d60971c6e57ab57919083b8e9f12ba72adeeb6"
+  time_difference: 86400
+  price_deviation: 0.5
+  confidence_ratio: 1

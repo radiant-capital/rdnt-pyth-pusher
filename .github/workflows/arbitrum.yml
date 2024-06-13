@@ -28,12 +28,15 @@ jobs:
         run: docker ps
 
       - name: Run price update
-        run: docker-compose -f arbitrum/docker-compose.yaml up
+        run: docker-compose -f arbitrum/docker-compose.yaml up -d
         env:
           MNEMONIC: ${{ secrets.MNEMONIC }}
 
       - name: Wait for the update to complete
         run: sleep 300 # Wait for 5 minutes to ensure the update is completed
+
+      - name: Capture logs
+        run: docker-compose -f arbitrum/docker-compose.yaml logs
 
       - name: Stop and remove docker containers
         run: docker-compose -f arbitrum/docker-compose.yaml down

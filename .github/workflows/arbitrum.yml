@@ -28,6 +28,6 @@ jobs:
         run: docker ps
 
       - name: Run price update
-        run: docker-compose -f arbitrum/docker-compose.yaml up
+        run: timeout 5m docker-compose -f arbitrum/docker-compose.yaml up
         env:
           MNEMONIC: ${{ secrets.MNEMONIC }}

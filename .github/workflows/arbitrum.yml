@@ -22,10 +22,10 @@ jobs:
         run: echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
 
       - name: Build docker images
-        run: docker-compose -f arbitrum/docker-compose.yml build
+        run: docker-compose -f arbitrum/docker-compose.yaml build
 
       - name: PS docker containers
         run: docker ps
 
       - name: Run price update
-        run: docker-compose -f arbitrum/docker-compose.yml up
+        run: docker-compose -f arbitrum/docker-compose.yaml up

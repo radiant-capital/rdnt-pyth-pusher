@@ -3,3 +3,8 @@
   time_difference: 86400
   price_deviation: 0.5
   confidence_ratio: 1
+- alias: GRAIL/USD
+  id: "0x48f3736d94693aa73c11214c4176ba7f997a8329f4dbc3854c4b2686861132ce"
+  time_difference: 86400
+  price_deviation: 0.5
+  confidence_ratio: 1

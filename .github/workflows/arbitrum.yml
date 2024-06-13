@@ -1,0 +1,31 @@
+name: Update pyth price for arbitrum
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Every hour
+    - cron: '0 * * * *'
+
+jobs:
+  upd_pyth_prices:
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_USER: ${{ secrets.DOCKER_USER }}
+      DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
+      MNEMONIC: ${{ secrets.MNEMONIC }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Login to DockerHub
+        run: docker login -u $DOCKER_USER -p $DOCKER_PASS
+
+      - name: Build docker images
+        run: docker-compose -f arbitrum/docker-compose.yml build
+
+      - name: PS docker containers
+        run: docker ps
+
+      - name: Run price update
+        run: docker-compose -f arbitrum/docker-compose.yml up

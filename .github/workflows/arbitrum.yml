@@ -29,3 +29,5 @@ jobs:
 
       - name: Run price update
         run: docker-compose -f arbitrum/docker-compose.yaml up
+        env:
+          MNEMONIC: ${{ secrets.MNEMONIC }}

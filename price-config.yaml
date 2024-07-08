@@ -8,3 +8,8 @@
   time_difference: 86400
   price_deviation: 0.5
   confidence_ratio: 1
+- alias: WEETH/USD
+  id: "0x9ee4e7c60b940440a261eb54b6d8149c23b580ed7da3139f7f08f4ea29dad395"
+  time_difference: 86400
+  price_deviation: 0.5
+  confidence_ratio: 1

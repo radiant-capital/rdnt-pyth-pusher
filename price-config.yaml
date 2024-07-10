@@ -13,3 +13,18 @@
   time_difference: 86400
   price_deviation: 0.5
   confidence_ratio: 1
+- alias: WSTETH/USD
+  id: "0x6df640f3b8963d8f8358f791f352b8364513f6ab1cca5ed3f1f7b5448980e784"
+  time_difference: 86400
+  price_deviation: 0.5
+  confidence_ratio: 1
+- alias: SDAI/USD
+  id: "0x710659c5a68e2416ce4264ca8d50d34acc20041d91289110eea152c52ff3dc39"
+  time_difference: 86400
+  price_deviation: 0.5
+  confidence_ratio: 1
+- alias: RETH/USD
+  id: "0xa0255134973f4fdf2f8f7808354274a3b1ebc6ee438be898d045e8b56ba1fe13"
+  time_difference: 86400
+  price_deviation: 0.5
+  confidence_ratio: 1

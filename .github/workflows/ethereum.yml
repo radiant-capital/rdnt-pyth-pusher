@@ -1,0 +1,42 @@
+name: Update pyth price for ethereum
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Every 12 hours
+    - cron: "0 */12 * * *"
+
+jobs:
+  upd_pyth_prices:
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_USER: ${{ secrets.DOCKER_USER }}
+      DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
+      MNEMONIC: ${{ secrets.MNEMONIC }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Login to DockerHub
+        run: echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+
+      - name: Build docker images
+        run: docker-compose -f ethereum/docker-compose.yaml build
+
+      - name: PS docker containers
+        run: docker ps
+
+      - name: Run price update
+        run: docker-compose -f ethereum/docker-compose.yaml up -d
+        env:
+          MNEMONIC: ${{ secrets.MNEMONIC }}
+
+      - name: Wait for the update to complete
+        run: sleep 300 # Wait for 5 minutes to ensure the update is completed
+
+      - name: Capture logs
+        run: docker-compose -f ethereum/docker-compose.yaml logs
+
+      - name: Stop and remove docker containers
+        run: docker-compose -f ethereum/docker-compose.yaml down

@@ -28,3 +28,8 @@
   time_difference: 86400
   price_deviation: 0.5
   confidence_ratio: 1
+- alias: USDY/USD
+  id: "0xe393449f6aff8a4b6d3e1165a7c9ebec103685f3b41e60db4277b5b6d10e7326"
+  time_difference: 86400
+  price_deviation: 0.5
+  confidence_ratio: 1

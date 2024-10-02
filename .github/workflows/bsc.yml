@@ -1,0 +1,50 @@
+name: Update pyth price for bsc
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Every 12 hours
+    - cron: "0 */12 * * *"
+
+jobs:
+  upd_pyth_prices:
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_USER: ${{ secrets.DOCKER_USER }}
+      DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
+      MNEMONIC: ${{ secrets.MNEMONIC }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Ensure Docker Compose is available
+        run: |
+          if ! [ -x "$(command -v docker-compose)" ]; then
+            sudo curl -L "https://github.com/docker/compose/releases/download/v2.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+            sudo chmod +x /usr/local/bin/docker-compose
+          fi
+          docker-compose --version
+
+      - name: Login to DockerHub
+        run: echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+
+      - name: Build docker images
+        run: docker-compose -f bsc/docker-compose.yaml build
+
+      - name: PS docker containers
+        run: docker ps
+
+      - name: Run price update
+        run: docker-compose -f bsc/docker-compose.yaml up -d
+        env:
+          MNEMONIC: ${{ secrets.MNEMONIC }}
+
+      - name: Wait for the update to complete
+        run: sleep 300 # Wait for 5 minutes to ensure the update is completed
+
+      - name: Capture logs
+        run: docker-compose -f bsc/docker-compose.yaml logs
+
+      - name: Stop and remove docker containers
+        run: docker-compose -f bsc/docker-compose.yaml down

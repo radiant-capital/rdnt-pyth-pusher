@@ -33,3 +33,8 @@
   time_difference: 86400
   price_deviation: 0.5
   confidence_ratio: 1
+- alias: FLOKI/USD
+  id: "0x6b1381ce7e874dc5410b197ac8348162c0dd6c0d4c9cd6322672d6c2b1d58293"
+  time_difference: 86400
+  price_deviation: 0.5
+  confidence_ratio: 1

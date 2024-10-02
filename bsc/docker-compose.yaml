@@ -1,0 +1,16 @@
+version: "3.3"
+services:
+  price-pusher:
+    container_name: bsc-rdnt-pyth-pusher
+    # Replace <version> with the latest released image of the price pusher from here:
+    # https://gallery.ecr.aws/pyth-network/xc-price-pusher
+    image: public.ecr.aws/pyth-network/xc-price-pusher:v6.8.0
+    restart: "no"
+    entrypoint: >
+      sh -c "echo '${MNEMONIC}' > /tmp/mnemonic && node lib/index.js evm --endpoint=https://binance.llamarpc.com
+      --mnemonic-file=/tmp/mnemonic --pyth-contract-address=0x4d7e825f80bdf85e913e0dd2a2d54927e9de1594
+      --price-service-endpoint=https://hermes.pyth.network --price-config-file=/price_config --polling-frequency=900"
+    environment:
+      - MNEMONIC=${MNEMONIC}
+    volumes:
+      - ./../price-config.yaml:/price_config

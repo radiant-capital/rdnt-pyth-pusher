@@ -7,7 +7,7 @@ services:
     image: public.ecr.aws/pyth-network/xc-price-pusher:v10.2.0
     restart: "no"
     entrypoint: >
-      sh -c "echo '${MNEMONIC}' > /tmp/mnemonic && node lib/index.js evm --endpoint=https://binance.llamarpc.com
+      sh -c "echo '${MNEMONIC}' > /tmp/mnemonic && node lib/index.js evm --endpoint=https://rpc-bsc.radiant.capital/e2af014b7281333ef80331dd368694e6b2e5c738/
       --mnemonic-file=/tmp/mnemonic --pyth-contract-address=0x4d7e825f80bdf85e913e0dd2a2d54927e9de1594
       --price-service-endpoint=https://hermes.pyth.network --price-config-file=/price_config --polling-frequency=900"
     environment:
